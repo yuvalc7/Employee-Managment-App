@@ -1,0 +1,163 @@
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="form-froup row" style="width: 60%">
+    <label class="col-sm-2 col-form-label">Full Name</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="full_name"
+        placeholder="Enter Employee Name"
+        [ngStyle]="{
+          'margin-bottom': !validateField['full_name'] ? '0' : '25px'
+        }"
+      />
+      <div *ngIf="!validateField['full_name']" style="color: red">
+        full Name missing or Illegal.
+      </div>
+    </div>
+
+    <label class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="email"
+        placeholder="Enter Employee Name"
+        [ngStyle]="{ 'margin-bottom': !validateField['email'] ? '0' : '25px' }"
+      />
+      <div *ngIf="!validateField['email']" style="color: red">
+        Email missing or Illegal.
+      </div>
+    </div>
+
+    <label class="col-sm-2 col-form-label">Phone Number</label>
+    <div class="col-sm-10">
+      <input
+        type="tel"
+        class="form-control"
+        [(ngModel)]="phone"
+        placeholder="Enter Employee phone"
+        [ngStyle]="{ 'margin-bottom': !validateField['phone'] ? '0' : '25px' }"
+      />
+      <div *ngIf="!validateField['phone']" style="color: red">
+        Phone missing or Illegal.
+      </div>
+    </div>
+
+    <label for="inputState" class="col-sm-2 col-form-label">Gender</label>
+    <div class="col-sm-10">
+      <select
+        *ngIf="emp.id != -1"
+        class="form-control"
+        name="employee-type"
+        id="inputState"
+        [(ngModel)]="sex"
+        [ngStyle]="{ 'margin-bottom': !validateField['sex'] ? '0' : '25px' }"
+      >
+        <option selected value="M">M</option>
+        <option value="F">F</option>
+      </select>
+      <input
+        *ngIf="emp.id == -1"
+        type="email"
+        class="form-control"
+        [(ngModel)]="sex"
+        placeholder="Enter Employee Name"
+        [ngStyle]="{ 'margin-bottom': !validateField['sex'] ? '0' : '25px' }"
+      />
+      <div *ngIf="!validateField['sex']" style="color: red">
+        Gender need to be select.
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label">Days in current month</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="days_in_month"
+        placeholder="Enter days_in_month"
+        [ngStyle]="{
+          'margin-bottom': !validateField['days_in_month'] ? '0' : '25px'
+        }"
+      />
+      <div *ngIf="!validateField['days_in_month']" style="color: red">
+        Days in month missing or Illegal.
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label" *ngIf="emp.id != -1"
+      >Start date</label
+    >
+    <div class="col-sm-10" *ngIf="emp.id != -1">
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="start_date_work"
+        [ngStyle]="{
+          'margin-bottom': !validateField['start_date_work'] ? '0' : '25px'
+        }"
+      />
+      <div *ngIf="!validateField['start_date_work']" style="color: red">
+        Start date work need to be select.
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label">Type</label>
+    <div class="col-sm-10">
+      <select
+        *ngIf="emp.id != -1"
+        class="form-control"
+        name="employee-type"
+        id="type-select"
+        [(ngModel)]="employee_type"
+      >
+        <option selected value="Junior">Junior</option>
+        <option value="Manager">Manager</option>
+        <option value="Senior">Senior</option>
+      </select>
+      <input
+        *ngIf="emp.id == -1"
+        type="text"
+        class="form-control"
+        [(ngModel)]="employee_type"
+        [ngStyle]="{
+          'margin-bottom': !validateField['employee_type'] ? '0' : '25px'
+        }"
+      />
+      <div *ngIf="!validateField['employee_type']" style="color: red">
+        Employee type date work need to be select.
+      </div>
+    </div>
+
+    <label class="col-sm-2 col-form-label" *ngIf="emp.id == -1"
+      >current month salary</label
+    >
+    <div class="col-sm-10" *ngIf="emp.id == -1">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="current_month_salary"
+        placeholder="Enter Employee current_month_salary"
+      />
+    </div>
+  </div>
+  <div class="ml-3 bd-highlight" style="width: 40%">
+    <img [src]="src_picture" height="250px" width="200px" alt="" />
+    <input type="file" (change)="uploadPhoto($event)" class="mt-2" />
+  </div>
+</div>
+<button
+  (click)="addEmployee()"
+  *ngIf="emp.id != -1 && emp.id == 0"
+  class="btn btn-primary"
+>
+  Save
+</button>
+<button
+  (click)="updateEmployee()"
+  *ngIf="emp.id != 0 && emp.id != -1"
+  class="btn btn-primary"
+>
+  Save
+</button>
+<!-- <button (click)="closeClick()" class="btn btn-primary">
+    Cancel
+  </button> -->
